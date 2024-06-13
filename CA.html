@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    .calculator {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    color: ;
+}
+
+.calculator input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.calculator .buttons button {
+    width: 70px;
+    height: 50px;
+    margin: 5px;
+    font-size: 18px;
+}
+.buttons{
+    background-color: yellow;
+}
+</style>
+<body>
+    <script>let display = document.getElementById('display');
+        let operand1 = '';
+        let operand2 = '';
+        let operation = '';
+        
+        function appendNumber(num) {
+            if (operation === '') {
+                operand1 += num;
+                display.value = operand1;
+            } else {
+                operand2 += num;
+                display.value = operand2;
+            }
+        }
+        
+        function setOperation(op) {
+            operation = op;
+        }
+        
+        function clearDisplay() {
+            display.value = '';
+            operand1 = '';
+            operand2 = '';
+            operation = '';
+        }
+        
+        function calculate() {
+            let result;
+            let num1 = parseFloat(operand1);
+            let num2 = parseFloat(operand2);
+            switch (operation) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 === 0) {
+                        result = 'Error';
+                    } else {
+                        result = num1 / num2;
+                    }
+                    break;
+                default:
+                    result = 'Error';
+            }
+            display.value = result;
+            operand1 = result.toString();
+            operand2 = '';
+            operation = '';
+        }
+        </script>
+    <div class="calculator">
+        <input
+         type="text" id="display" readonly>
+        <div class="buttons">
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="setOperation('+')">+</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="setOperation('-')">-</button>
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="setOperation('*')">*</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="setOperation('/')">/</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
